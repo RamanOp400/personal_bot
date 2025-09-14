@@ -6,12 +6,10 @@ from config import OPENAI_API_KEY, BOT_NAME, BOT_PERSONALITY, OPENROUTER_BASE_UR
 
 class OpenAIClient:
     def __init__(self):
-        # Try to get API key from environment first, then use direct key
-        api_key = os.getenv("OPENAI_API_KEY", "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")
-        
+        # Use the API key directly from config
         self.client = openai.OpenAI(
             base_url=OPENROUTER_BASE_URL,
-            api_key=api_key
+            api_key=OPENAI_API_KEY
         )
         self.model = "openai/gpt-4o-mini"  # Using GPT-4o-mini for great quality and cost efficiencybot 
     
@@ -138,6 +136,8 @@ class OpenAIClient:
         if user_name:
             return f"Heyy {user_name}! 😄 Main theek hoon, tum kaise ho? Aaj ka din kaisa jaa raha hai?"
         else:
+            return "Heyy! 😄 Main hun Raman. Main theek hoon, tum kaise ho? Aaj ka din kaisa jaa raha hai?"
+
             return "Heyy! 😄 Main hun Raman. Main theek hoon, tum kaise ho? Aaj ka din kaisa jaa raha hai?"
 
             return "Heyy! 😄 Main hun Raman. Main theek hoon, tum kaise ho? Aaj ka din kaisa jaa raha hai?"
