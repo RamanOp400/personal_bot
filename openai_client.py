@@ -9,7 +9,7 @@ class OpenAIClient:
         # Use the API key directly from config
         self.client = openai.OpenAI(
             base_url=OPENROUTER_BASE_URL,
-            api_key=OPENAI_API_KEY
+            api_key=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
         )
         self.model = "openai/gpt-4o-mini"  # Using GPT-4o-mini for great quality and cost efficiencybot 
     
