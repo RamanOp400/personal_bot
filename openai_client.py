@@ -3,13 +3,14 @@ import os
 import json
 from typing import List, Dict, Optional
 from config import OPENAI_API_KEY, BOT_NAME, BOT_PERSONALITY, OPENROUTER_BASE_URL, OPENROUTER_SITE_URL, OPENROUTER_SITE_NAME
+from simple_responses import get_simple_response
 
 class OpenAIClient:
     def __init__(self):
         # Use the API key directly from config
         self.client = openai.OpenAI(
             base_url=OPENROUTER_BASE_URL,
-            api_key=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
+            api_key=OPENAI_API_KEY
         )
         self.model = "openai/gpt-4o-mini"  # Using GPT-4o-mini for great quality and cost efficiencybot 
     
@@ -91,10 +92,8 @@ class OpenAIClient:
             
         except Exception as e:
             error_msg = str(e)
-            if "402" in error_msg or "credits" in error_msg.lower():
-                return "Sorry! I'm running low on credits right now. 😅 Please try again later or check your OpenRouter account. For now, I can still chat but with limited responses!"
-            else:
-                return f"Sorry, I'm having a little trouble right now! 😅 Please try again in a moment. (Error: {error_msg})"
+            # Return a simple response instead of error message
+            return get_simple_response()
     
     def _build_context_from_history(self, history: List[Dict]) -> str:
         """Build context string from conversation history"""
@@ -138,6 +137,3 @@ class OpenAIClient:
         else:
             return "Heyy! 😄 Main hun Raman. Main theek hoon, tum kaise ho? Aaj ka din kaisa jaa raha hai?"
 
-            return "Heyy! 😄 Main hun Raman. Main theek hoon, tum kaise ho? Aaj ka din kaisa jaa raha hai?"
-
-            return "Heyy! 😄 Main hun Raman. Main theek hoon, tum kaise ho? Aaj ka din kaisa jaa raha hai?"
